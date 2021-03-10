@@ -26,10 +26,8 @@
 
 require_once ("config.php");
 
-$sql = new Sql();
-
+/*$sql = new Sql();
 $usuarios = $sql->select("select * from tb_usuarios");
-
 echo "<h3 class='red-text center'>LISTA DE REGISTROS</h3>";
 echo "<hr>";
 
@@ -40,9 +38,12 @@ foreach ($usuarios as $row) {
     }
     echo "<hr>";
 }
+//echo json_encode($usuarios);*/
 
+$user = new Usuario();
 
+$user->loadbyId(4);
 
-//echo json_encode($usuarios);
+echo $user;
 
 

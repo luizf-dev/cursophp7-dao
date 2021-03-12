@@ -16,7 +16,7 @@ foreach ($usuarios as $row) {
 }
 //echo json_encode($usuarios);*/
 
-echo "<h5>LISTA UM ÚNICO USUÁRIO</h5>";
+/*echo "<h5>LISTA UM ÚNICO USUÁRIO</h5>";
 $user = new Usuario();
 $user->loadbyId(2);
 echo $user ."<hr>";
@@ -33,3 +33,22 @@ echo "<h5>CARREGA UM USUÁRIO USANDO O LOGIN E A SENHA</h5>";
 $usuario = new Usuario();
 $usuario->login("user", "12345");
 echo $usuario . "<hr>";
+
+//criando um novo usuario
+$aluno = new Usuario("teste", "123456");
+//$aluno = new Usuario(); essa tambem é uma forma de fazer igual a de cima, porem com mais linhas
+//$aluno->setLogin("aluno");
+//$aluno->setSenha("qwerty");
+$aluno->insert();
+//echo $aluno;
+echo "<hr>";*/
+
+$usuario = new Usuario();
+
+$usuario->loadbyId(28);
+
+$usuario->update("professor", "!@#$");
+
+echo $usuario;
+
+

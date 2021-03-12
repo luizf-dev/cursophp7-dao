@@ -48,16 +48,12 @@ class Usuario {
         //if(isset($resultados[0])) outra maneira de fazer.
         if(count($resultados) > 0){
 
-            $row = $resultados[0];
-            $this->setId($row['id']);
-            $this->setLogin($row['login']);
-            $this->setSenha($row['senha']);
-            $this->setCadastro(new Datetime($row['cadastro']));
+            $this->setDados($resultados[0]);            
         }
 
     }
 
-        //LISTA TODOS OS USUARIOS QUE ESTAO NA TABELA//
+    //LISTA TODOS OS USUARIOS QUE ESTAO NA TABELA//
     public static function getList(){
 
         $sql = new Sql();
@@ -85,14 +81,52 @@ class Usuario {
         //if(isset($resultados[0])) outra maneira de fazer.
         if(count($resultados) > 0){
 
-            $row = $resultados[0];
-            $this->setId($row['id']);
-            $this->setLogin($row['login']);
-            $this->setSenha($row['senha']);
-            $this->setCadastro(new Datetime($row['cadastro']));
+            $this->setDados($resultados[0]);
+            
         }else{
             throw new Exception("<h1 class='red-text'>LOGIN OU SENHA INVÁLIDOS!!</h1>");
         }
+    }
+
+    public function setDados($dados){
+
+            $this->setId($dados['id']);
+            $this->setLogin($dados['login']);
+            $this->setSenha($dados['senha']);
+            $this->setCadastro(($dados['cadastro']));
+    }
+
+    public function insert(){
+
+        $sql = new Sql();
+        $resultados = $sql->select('CALL sp_usuarios_insert(:LOGIN, :SENHA)', array(
+            ':LOGIN'=>$this->getLogin(),
+            ':SENHA'=>$this->getSenha()
+        ));
+
+        if(count($resultados) > 0){
+
+            $this->setDados($resultados[0]);
+    }
+    }
+
+    public function update($login, $senha){
+
+        $this->setLogin($login);
+        $this->setSenha($senha);
+
+        $sql = new Sql();
+        $sql->query("update tb_usuarios set login = :LOGIN, senha = :SENHA where id = :ID", array(
+            ':LOGIN'=>$this->getLogin(),
+            ':SENHA'=>$this->getSenha(),
+            ':ID'=>$this->getId()
+        ));
+    }
+
+    public function __construct($login = "", $senha = ""){
+
+        $this->setLogin($login);
+        $this->setSenha($senha);
     }
 
     public function __toString(){
@@ -100,7 +134,7 @@ class Usuario {
             "id"=>$this->getId(),
             "login"=>$this->getLogin(),
             "senha"=>$this->getSenha(),
-            "cadastro"=>$this->getCadastro()->format("d-m-Y - H:i:s")
+            "cadastro"=>$this->getCadastro()//->format("d-m-Y - H:i:s")
         ));
     }
 }

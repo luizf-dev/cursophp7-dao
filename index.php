@@ -43,6 +43,7 @@ $aluno->insert();
 //echo $aluno;
 echo "<hr>";*/
 
+
 $usuario = new Usuario();
 
 $usuario->loadbyId(28);
@@ -50,5 +51,7 @@ $usuario->loadbyId(28);
 $usuario->update("professor", "!@#$");
 
 echo $usuario;
+
+
 
 

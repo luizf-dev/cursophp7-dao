@@ -116,10 +116,10 @@ class Usuario {
         $this->setSenha($senha);
 
         $sql = new Sql();
-        $sql->query("update tb_usuarios set login = :LOGIN, senha = :SENHA where id = :ID", array(
+        $sql->query("update tb_usuarios set login = :LOGIN, senha = :SENHA where id = :ID",array(
             ':LOGIN'=>$this->getLogin(),
             ':SENHA'=>$this->getSenha(),
-            ':ID'=>$this->getId()
+            ':ID'=>$this->getid()
         ));
     }
 

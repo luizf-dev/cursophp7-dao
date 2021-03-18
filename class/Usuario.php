@@ -119,9 +119,26 @@ class Usuario {
         $sql->query("update tb_usuarios set login = :LOGIN, senha = :SENHA where id = :ID",array(
             ':LOGIN'=>$this->getLogin(),
             ':SENHA'=>$this->getSenha(),
-            ':ID'=>$this->getid()
+            ':ID'=>$this->getId()
         ));
     }
+
+    public function delete(){
+
+        $sql = new Sql();
+        $sql->query("delete from  tb_usuarios where id = :ID",array(
+    
+            ':ID'=>$this->getId()
+        ));
+
+        $this->setId(0);
+        $this->setLogin("");
+        $this->setSenha("");
+        $this->setCadastro(new DateTime());
+    }
+
+
+    
 
     public function __construct($login = "", $senha = ""){
 

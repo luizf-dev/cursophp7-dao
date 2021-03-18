@@ -21,6 +21,7 @@ $user = new Usuario();
 $user->loadbyId(2);
 echo $user ."<hr>";
 
+//SELECT
 echo "<h5>CARREGA A LISTA DE USUÁRIOS DA TABELA</h5>";
 $lista = Usuario::getList();
 echo json_encode($lista) ."<hr>";
@@ -34,7 +35,7 @@ $usuario = new Usuario();
 $usuario->login("user", "12345");
 echo $usuario . "<hr>";
 
-//criando um novo usuario
+//INSERT
 $aluno = new Usuario("teste", "123456");
 //$aluno = new Usuario(); essa tambem é uma forma de fazer igual a de cima, porem com mais linhas
 //$aluno->setLogin("aluno");
@@ -43,15 +44,23 @@ $aluno->insert();
 //echo $aluno;
 echo "<hr>";*/
 
-
+/*
+//UPDATE 
 $usuario = new Usuario();
 
 $usuario->loadbyId(28);
 
 $usuario->update("professor", "!@#$");
 
-echo $usuario;
+echo $usuario;*/
 
+
+//DELETE
+$usuario = new Usuario();
+
+$usuario->loadbyId(2);
+$usuario->delete();
+echo $usuario;
 
 
 
